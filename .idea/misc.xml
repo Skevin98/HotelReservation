@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/drawable/ic_contact_mail.xml" value="0.2846153846153846" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_main.xml" value="0.14" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_menu.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/nav_header.xml" value="0.22982456140350876" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/menu/drawer_menu.xml" value="0.22" />
       </map>
     </option>
   </component>
