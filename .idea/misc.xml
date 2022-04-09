@@ -6,14 +6,15 @@
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/drawable/ic_contact_mail.xml" value="0.2846153846153846" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_connexion.xml" value="0.22982456140350876" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_main.xml" value="0.14" />
-        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_menu.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_menu.xml" value="0.22" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_reset_password.xml" value="0.22" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_home.xml" value="0.22982456140350876" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_single_room.xml" value="0.2179824561403509" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/nav_header.xml" value="0.22982456140350876" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/menu/bottom_menu.xml" value="0.12017543859649123" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/menu/drawer_menu.xml" value="0.22" />
       </map>
     </option>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

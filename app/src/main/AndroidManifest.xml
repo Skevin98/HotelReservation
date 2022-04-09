@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelReservation">
         <activity
+            android:name=".CreateReservationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="true" />
+        <activity
             android:name=".MenuActivity"
             android:exported="true" />
         <activity
