@@ -3,7 +3,7 @@
     <item
         android:title="Nos chambres"
         android:icon="@drawable/ic_baseline_king_bed_24"
-        android:id="@+id/homeFragment">
+        android:id="@+id/listRoomFragment">
     </item>
     <item
         android:title="Mes reservations"
