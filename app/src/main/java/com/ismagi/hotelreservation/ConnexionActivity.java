@@ -26,6 +26,8 @@ public class ConnexionActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //profil de test : sawadogokevin98@gmail.com
+
         auth = FirebaseAuth.getInstance();
 
         acb = ActivityConnexionBinding.inflate(getLayoutInflater());
