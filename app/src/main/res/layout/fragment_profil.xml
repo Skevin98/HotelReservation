@@ -5,10 +5,314 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.ProfilFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView22"
+            style="@style/Widget.AppCompat.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="Mon profil"
+            android:textSize="40dp"
+            android:textStyle="bold"
+/>
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:id="@+id/bt_change_username"
+            android:focusable="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Nom"
+                android:textColor="#A89F9F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_p_nom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:gravity="end"
+                android:text="abcdefghijklmno"
+                android:textColor="#5E5555"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:id="@+id/btn_send"
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_modif"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:id="@+id/bt_change_numabo"
+            android:focusable="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Prénom"
+                android:textColor="#A89F9F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_p_prenom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="#5E5555"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="12345678901234" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_modif"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Numéro de téléphone"
+                android:textColor="#A89F9F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+<!--            <TextView-->
+
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:text="+212"-->
+<!--                android:textColor="#5E5555"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold" />-->
+
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:id="@+id/num_tel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#5E5555"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="12345678" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="E-mail"
+                android:textColor="#A89F9F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="#5E5555"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="12345678901234" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Adresse"
+                android:textColor="#A89F9F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_p_adresse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="#5E5555"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="12345678901234" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Sexe"
+                android:textColor="#A89F9F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtp_sexe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="#5E5555"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="12345678901234" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Age"
+                android:textColor="#A89F9F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_p_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="#5E5555"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="12345678901234" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Mot de passe"
+                android:textColor="#A89F9F"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_p_mdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="#5E5555"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="12345678901234" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
 
 </FrameLayout>
