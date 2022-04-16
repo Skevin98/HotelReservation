@@ -1,23 +1,17 @@
 package com.ismagi.hotelreservation;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,22 +20,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ismagi.hotelreservation.DAO.PersonneDAO;
 import com.ismagi.hotelreservation.Models.Personne;
 import com.ismagi.hotelreservation.databinding.ActivityRegisterBinding;
-import com.ismagi.hotelreservation.databinding.ActivityResetPasswordBinding;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONStringer;
-
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
-import static java.lang.Integer.valueOf;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityRegisterBinding arb;
+
+    private RadioButton radioButton;
 
     PersonneDAO DAO;
 
@@ -51,19 +38,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Personne p;
 
     private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    "(?=.*[0-9])" +
-                    "(?=.*[a-zA-Z])" +
-                    "(?=\\S+$)" +
-                    ".{8,}" +
-                    "$");
+            Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{8,}$");
 
     private static final Pattern NUMABON_PATTERN =
-            Pattern.compile("^" +
-                    "(?=.*[0-9])" +
-                    "(?=\\S+$)" +
-                    ".{14}" +
-                    "$");
+            Pattern.compile("^(?=.*[0-9])(?=\\S+$).{14}$");
 
     FirebaseAuth mAuth;
 
@@ -78,6 +56,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         DAO = new PersonneDAO(this);
 
         arb.btnCreate.setOnClickListener(this);
+
+        arb.pickerAge.setMinValue(0);
+        arb.pickerAge.setMaxValue(200);
+
+        p = new Personne();
+        p = DAO.GetById("1e3ebf4f-108d-45b5-ad93-868b4e29ce45");
+
 
     }
 
@@ -95,6 +80,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             try {
                                 DAO.Add(p);
                                 Intent activit = new Intent(getApplicationContext(), MenuActivity.class);
+                                activit.putExtra("idUser",p.getId());
                                 Log.i("RegisterActivity", "Compte créé avec succès");
                                 getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(activit);
@@ -102,17 +88,78 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             } finally {
                                 finish();
                             }
-                            //updateUI(user);
+
                         } else {
-                            // If sign in fails, display a message to the user.
+
                             Log.w("RegisterActivity", "Creation échouée.", task.getException());
                             Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+
                         }
                     }
                 });
 
+    }
+
+    private boolean validateEmail(){
+        String emailInput = arb.txtMailRegister.getEditableText().toString().trim();
+
+        if (emailInput.isEmpty()) {
+            arb.textLayoutMail.setError("Champ Obligatoire");
+            return false;
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
+            arb.textLayoutMail.setError("Adresse mail invalide");
+            return false;
+        }
+        else{
+            arb.textLayoutMail.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword(){
+        String passwordInput = arb.txtMdpRegister.getEditableText().toString().trim();
+        String passwordInputverif = arb.txtMdpConfirm.getEditableText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+
+            arb.textlayoutMdp.setError("Champ Obligatoire");
+            return false;
+        }
+        else if (passwordInputverif.isEmpty()) {
+            arb.textlayoutMdpVerif.setError("Champ Obligatoire");
+            return false;
+        }
+        else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()){
+            arb.textlayoutMdp.setError("Doit contenir au moins 8 caractères et au moins un chiffre [0 à 9]");
+            return false;
+        }
+        else if (!passwordInput.equals(passwordInputverif) ){
+            arb.textlayoutMdpVerif.setError("Les mots de passe ne correspondent pas.");
+            return false;
+        }
+        else{
+            arb.textlayoutMdpVerif.setError(null);
+
+            arb.textlayoutMdp.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateName(){
+        String nameInput = arb.txtNom.getEditableText().toString().trim();
+
+        if (nameInput.isEmpty()) {
+
+            arb.textLayoutNom.setError("Champ Obligatoire");
+            return false;
+        }
+
+        else{
+            arb.textLayoutNom.setError(null);
+            return true;
+        }
     }
 
 
@@ -122,17 +169,39 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        p = new Personne();
-        p.setNom(arb.txtNom.getText().toString());
-        p.setPrenom(arb.txtPrenom.getText().toString());
-        p.setAdresse(arb.txtAdresse.getText().toString());
-        p.setAge(valueOf(arb.txtAge.getText().toString()));
-        p.setMail(arb.txtMailRegister.getText().toString());
-        p.setNumero(arb.txtPhone.getText().toString());
-        p.setMdp(arb.txtMdpRegister.getText().toString());
-        p.setSexe("Masculin");
-        String confirm = arb.txtMdpConfirm.getText().toString();
-        register(p);
+        switch (view.getId()){
+            case R.id.btn_create:
+
+                p = new Personne();
+//                p = DAO.GetById("1e3ebf4f-108d-45b5-ad93-868b4e29ce45");
+//                Log.i(TAG, "onClick: "+p.getNom());
+
+
+                p.setNom(arb.txtNom.getText().toString());
+                p.setPrenom(arb.txtPrenom.getText().toString());
+                p.setAdresse(arb.txtAdresse.getText().toString());
+                p.setAge(arb.pickerAge.getValue());
+                p.setMail(arb.txtMailRegister.getText().toString());
+                p.setNumero(arb.txtPhone.getText().toString());
+                p.setMdp(arb.txtMdpRegister.getText().toString());
+
+                int SelectedS = arb.radioGroup.getCheckedRadioButtonId();
+                radioButton = findViewById(SelectedS);
+                p.setSexe(radioButton.getText().toString());
+                if (!validateName() || !validateEmail() || !validatePassword()){
+
+                    Toast.makeText(RegisterActivity.this," Coordonnées invalides ",Toast.LENGTH_LONG).show();
+
+                }
+                else
+                    Log.i(TAG, "onClick: "+p.getNom());
+                    register(p);
+                break;
+            case R.id.btn_cancel:
+                break;
+
+        }
+
 
 
 

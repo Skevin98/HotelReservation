@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
         <RadioGroup
@@ -15,7 +20,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutMail">
 
             <RadioButton
                 android:id="@+id/masc"
@@ -33,6 +38,7 @@
                 android:id="@+id/nps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="Ne pas spécifier" />
         </RadioGroup>
 
@@ -61,12 +67,13 @@
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:paddingHorizontal="10dp"
+            android:id="@+id/textLayoutNom"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/textInputLayout4"
             android:layout_width="409dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,20 +83,22 @@
                 android:id="@+id/txt_nom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType=""
                 android:hint="Nom*" />
         </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/textInputLayout5"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+        <com.google.android.material.textfield.TextInputLayout
+            android:paddingHorizontal="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/textInputLayout5"
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutNom">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_prenom"
@@ -99,6 +108,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:paddingHorizontal="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayout6"
         android:layout_width="409dp"
@@ -118,8 +128,9 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:paddingHorizontal="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/textInputLayout7"
+        android:id="@+id/textLayoutMail"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
@@ -135,10 +146,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Adresse mail*" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+
+    <LinearLayout
+        android:paddingHorizontal="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:orientation="vertical"
         android:id="@+id/textInputLayout8"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
@@ -149,16 +164,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_age"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="2"
-            android:hint="Age*" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:text="Age"
+            android:textSize="15dp">
+
+        </TextView>
+
+        <NumberPicker
+
+            android:id="@+id/picker_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+             />
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:paddingHorizontal="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayout9"
         android:layout_width="409dp"
@@ -177,9 +201,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:paddingHorizontal="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:passwordToggleEnabled="true"
-        android:id="@+id/textInputLayout10"
+        android:id="@+id/textlayoutMdp"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
@@ -195,12 +220,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mot de passe*" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:paddingHorizontal="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:passwordToggleEnabled="true"
-        android:id="@+id/textInputLayout11"
+        android:id="@+id/textlayoutMdpVerif"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
@@ -208,7 +235,7 @@
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout10">
+        app:layout_constraintTop_toBottomOf="@+id/textlayoutMdp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:inputType="textPassword"
@@ -218,16 +245,16 @@
             android:hint="Confirmer le mot de passe*" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <CheckBox
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/newlestter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="S'abonner à la newlester"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout11" />
+        app:layout_constraintTop_toBottomOf="@+id/textlayoutMdpVerif" />
 
-    <CheckBox
+    <com.google.android.material.checkbox.MaterialCheckBox
 
         android:id="@+id/checkBox2"
         android:layout_width="wrap_content"
@@ -236,26 +263,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newlestter" />
 
-    <Button
-        android:id="@+id/btn_create"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="61dp"
-        android:layout_marginEnd="34dp"
-        android:text="S'inscrire"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Annuler"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
-    <Button
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Annuler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+        <Button
 
+            android:id="@+id/btn_create"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="S'inscrire"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

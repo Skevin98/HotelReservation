@@ -4,11 +4,15 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ismagi.hotelreservation.Models.Personne;
@@ -96,16 +100,17 @@ public class PersonneDAO implements IDao<Personne>  {
 
     @Override
     public Personne GetById(String id) {
-        String GetUrl =url+"/"+id;
         Personne p = new Personne();
+        String GetUrl = url+"/"+id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, GetUrl,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject resp) {
 
                 try {
+
                     p.setFirebaseId(resp.getString("idFirebasePersonne"));
                     p.setSexe(resp.getString("sexe"));
                     p.setAge(resp.getInt("age"));
@@ -115,6 +120,7 @@ public class PersonneDAO implements IDao<Personne>  {
                     p.setPrenom(resp.getString("prenom"));
                     p.setAdresse(resp.getString("adresse"));
                     p.setId(resp.getString("idPersonne"));
+                    Log.i(TAG, "onResponse: Requete envoyée "+p.getNom());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -124,25 +130,36 @@ public class PersonneDAO implements IDao<Personne>  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error == null || error.networkResponse == null) {
-                    return;
+                    Log.i(TAG, "onErrorResponse: "+error);
+                }
+                else{
+                    String body="";
+                    //get status code here
+                    final String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    try {
+                        body = new String(error.networkResponse.data,"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        // exception
+                    }
+                    Log.i(TAG, "onErrorResponse: "+body);
                 }
 
-                String body="";
-                //get status code here
-                final String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                try {
-                    body = new String(error.networkResponse.data,"UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    // exception
-                }
-                Log.i(TAG, "onErrorResponse: "+body);
+
             }
         }){
+            @NonNull
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("idPersonnne",id);
+                return params;
+            }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
                 return headers;
             }
         };
@@ -181,7 +198,7 @@ public class PersonneDAO implements IDao<Personne>  {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     if (error == null || error.networkResponse == null) {
-                        return;
+                        Log.i(TAG, "onErrorResponse: "+error);
                     }
 
                     String body="";
@@ -240,7 +257,7 @@ public class PersonneDAO implements IDao<Personne>  {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     if (error == null || error.networkResponse == null) {
-                        return;
+                        Log.i(TAG, "onErrorResponse: "+error);
                     }
 
                     String body="";
@@ -279,24 +296,25 @@ public class PersonneDAO implements IDao<Personne>  {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject resp) {
+            public void onResponse(JSONArray resp) {
                 try {
-                    JSONArray array = resp.getJSONArray("Personne");
-                    for (int i = 0; i < array.length(); i++){
+                    for (int i = 0; i < resp.length(); i++){
                         Personne p = new Personne();
-                        p.setFirebaseId(resp.getString("idFirebasePersonne"));
-                        p.setSexe(resp.getString("sexe"));
-                        p.setAge(resp.getInt("age"));
-                        p.setNumero(resp.getString("telephone"));
-                        p.setMdp(resp.getString("mot_de_passe"));
-                        p.setNom(resp.getString("nom"));
-                        p.setPrenom(resp.getString("prenom"));
-                        p.setAdresse(resp.getString("adresse"));
-                        p.setId(resp.getString("idPersonne"));
+                        JSONObject json = resp.getJSONObject(i);
+                        p.setFirebaseId(json.getString("idFirebasePersonne"));
+                        p.setSexe(json.getString("sexe"));
+                        p.setAge(json.getInt("age"));
+                        p.setNumero(json.getString("telephone"));
+                        p.setMdp(json.getString("mot_de_passe"));
+                        p.setNom(json.getString("nom"));
+                        p.setPrenom(json.getString("prenom"));
+                        p.setAdresse(json.getString("adresse"));
+                        p.setId(json.getString("idPersonne"));
 
                         list.add(p);
+
                     }
 
 
@@ -309,7 +327,7 @@ public class PersonneDAO implements IDao<Personne>  {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error == null || error.networkResponse == null) {
-                    return;
+                    Log.i(TAG, "onErrorResponse: "+error);
                 }
 
                 String body="";
