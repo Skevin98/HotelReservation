@@ -9,12 +9,21 @@ public class Reservation {
         this.idReservation = UUID.randomUUID().toString();
     }
 
+
     public String getIdReservation() {
         return idReservation;
     }
 
     public void setIdReservation(String idReservation) {
         this.idReservation = idReservation;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public Chambre[] getChambres() {
@@ -49,20 +58,28 @@ public class Reservation {
         this.dateSortie = dateSortie;
     }
 
-    public boolean isEtat() {
-        return etat;
+    public boolean isActive() {
+        return isActive;
     }
 
-    public void setEtat(boolean etat) {
-        this.etat = etat;
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
-    public Personne[] getClients() {
-        return clients;
+    public int getNbEnfant() {
+        return NbEnfant;
     }
 
-    public void setClients(Personne[] clients) {
-        this.clients = clients;
+    public void setNbEnfant(int nbEnfant) {
+        NbEnfant = nbEnfant;
+    }
+
+    public int getNbAdult() {
+        return NbAdult;
+    }
+
+    public void setNbAdult(int nbAdult) {
+        NbAdult = nbAdult;
     }
 
     public double getMontant() {
@@ -74,11 +91,13 @@ public class Reservation {
     }
 
     String idReservation;
+    String idUser;
     Chambre[] chambres = null;
     Date dateReservation;
     Date dateEntree;
     Date dateSortie;
-    boolean etat;
-    Personne[] clients = null;
+    boolean isActive;
+    int NbEnfant;
+    int NbAdult;
     double montant;
 }

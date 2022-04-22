@@ -12,7 +12,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.ismagi.hotelreservation.Models.Personne;
 import com.ismagi.hotelreservation.Models.Reservation;
 import com.ismagi.hotelreservation.Utils.HttpHelper;
 
@@ -38,14 +37,14 @@ public class ReservationDAO implements IDao<Reservation> {
     public void Add(Reservation obj) {
         JSONObject json = new JSONObject();
         try {
-            json.put("idReservation", obj.getIdReservation());
-            json.put("chambres", obj.getChambres());
-            json.put("dateReservation", obj.getDateReservation());
-            json.put("dateEntree", obj.getDateEntree());
-            json.put("dateSortie",obj.getDateSortie());
-            json.put("etat",obj.isEtat());
-            json.put("personnes", obj.getClients());
-            json.put("montant",obj.getMontant());
+            json.put("IdReservation", obj.getIdReservation());
+            json.put("Chambres", obj.getChambres());
+            json.put("DateReservation", obj.getDateReservation());
+            json.put("DateEntree", obj.getDateEntree());
+            json.put("DateSortie",obj.getDateSortie());
+            json.put("IsActive",obj.isActive());
+            json.put("Invites", obj.getInvites());
+            json.put("Montant",obj.getMontant());
 
             RequestQueue requestQueue = Volley.newRequestQueue(context);
 
@@ -102,7 +101,7 @@ public class ReservationDAO implements IDao<Reservation> {
                 try {
 
                     r.setIdReservation(resp.getString("idReservation"));
-                    r.setChambres(re);
+                    r.se
                     Log.i(TAG, "onResponse: Requete envoyée "+p.getNom());
                 } catch (JSONException e) {
                     e.printStackTrace();

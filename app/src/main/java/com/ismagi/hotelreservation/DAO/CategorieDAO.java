@@ -14,7 +14,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ismagi.hotelreservation.Models.Categorie;
-import com.ismagi.hotelreservation.Models.Personne;
 import com.ismagi.hotelreservation.Utils.HttpHelper;
 
 import org.json.JSONArray;
@@ -28,7 +27,7 @@ import java.util.Map;
 
 class CategorieDAO implements IDao<Categorie> {
 
-    String url = HttpHelper.GetUrl()+"/Personne";
+    String url = HttpHelper.GetUrl()+"/User";
     private String TAG = "CategorieDAO";
     private Context context;
 

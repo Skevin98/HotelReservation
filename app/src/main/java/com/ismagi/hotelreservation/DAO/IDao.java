@@ -2,7 +2,7 @@ package com.ismagi.hotelreservation.DAO;
 
 import java.util.List;
 
-interface IDao<T> {
+public interface IDao<T> {
 
     void Add(T obj);
     T GetById(String id);

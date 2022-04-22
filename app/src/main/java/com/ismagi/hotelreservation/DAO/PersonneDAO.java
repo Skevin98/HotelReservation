@@ -1,11 +1,9 @@
 package com.ismagi.hotelreservation.DAO;
 
-import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -15,7 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.ismagi.hotelreservation.Models.Personne;
+import com.ismagi.hotelreservation.Models.User;
 import com.ismagi.hotelreservation.Utils.HttpHelper;
 
 import org.json.JSONArray;
@@ -29,9 +27,9 @@ import java.util.Map;
 
 import static java.lang.Integer.valueOf;
 
-public class PersonneDAO implements IDao<Personne>  {
+public class PersonneDAO implements IDao<User>  {
 
-    String url = HttpHelper.GetUrl()+"/Personne";
+    String url = HttpHelper.GetUrl()+"/User";
     private String TAG = "PersonneDAO";
     private Context context;
 
@@ -40,7 +38,7 @@ public class PersonneDAO implements IDao<Personne>  {
     }
 
     @Override
-    public void Add(Personne obj) {
+    public void Add(User obj) {
         JSONObject json = new JSONObject();
         try {
             json.put("idPersonne", obj.getId());
@@ -99,8 +97,8 @@ public class PersonneDAO implements IDao<Personne>  {
     }
 
     @Override
-    public Personne GetById(String id) {
-        Personne p = new Personne();
+    public User GetById(String id) {
+        User p = new User();
         String GetUrl = url+"/"+id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -172,7 +170,7 @@ public class PersonneDAO implements IDao<Personne>  {
     }
 
     @Override
-    public void Update(Personne obj) {
+    public void Update(User obj) {
         JSONObject json = new JSONObject();
         try {
             json.put("idPersonne", obj.getId());
@@ -231,7 +229,7 @@ public class PersonneDAO implements IDao<Personne>  {
     }
 
     @Override
-    public void Delete(Personne obj) {
+    public void Delete(User obj) {
         JSONObject json = new JSONObject();
         try {
             json.put("idPersonne", obj.getId());
@@ -290,8 +288,8 @@ public class PersonneDAO implements IDao<Personne>  {
     }
 
     @Override
-    public List<Personne> GetAll() {
-        List<Personne> list = null;
+    public List<User> GetAll() {
+        List<User> list = null;
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -301,7 +299,7 @@ public class PersonneDAO implements IDao<Personne>  {
             public void onResponse(JSONArray resp) {
                 try {
                     for (int i = 0; i < resp.length(); i++){
-                        Personne p = new Personne();
+                        User p = new User();
                         JSONObject json = resp.getJSONObject(i);
                         p.setFirebaseId(json.getString("idFirebasePersonne"));
                         p.setSexe(json.getString("sexe"));

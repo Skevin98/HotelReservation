@@ -1,40 +1,41 @@
 package com.ismagi.hotelreservation.Models;
 
 public class Categorie {
+
     public String getIdCategorie() {
-        return idCategorie;
+        return IdCategorie;
     }
 
     public void setIdCategorie(String idCategorie) {
-        this.idCategorie = idCategorie;
+        IdCategorie = idCategorie;
     }
 
     public String getLibelle() {
-        return libelle;
+        return Libelle;
     }
 
     public void setLibelle(String libelle) {
-        this.libelle = libelle;
+        Libelle = libelle;
     }
 
     public double getTarif() {
-        return tarif;
+        return Tarif;
     }
 
     public void setTarif(double tarif) {
-        this.tarif = tarif;
+        Tarif = tarif;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        Description = description;
     }
 
-    protected String idCategorie;
-    protected String libelle;
-    protected double tarif;
-    protected String description;
+    protected String IdCategorie;
+    protected String Libelle;
+    protected double Tarif;
+    protected String Description;
 }
