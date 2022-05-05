@@ -10,6 +10,14 @@ public class Chambre {
         Id = id;
     }
 
+    public int getNumero() {
+        return Numero;
+    }
+
+    public void setNumero(int numero) {
+        Numero = numero;
+    }
+
     public int getNumEtage() {
         return NumEtage;
     }
@@ -75,6 +83,7 @@ public class Chambre {
     }
 
     String Id;
+    int Numero;
     int NumEtage;
     int NbLits;
     Categorie Categorie;

@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".ConnexionActivity"
             android:exported="true"
-            android:theme="@style/Theme.Design.NoActionBar">
+            >
 
         </activity>
         <activity

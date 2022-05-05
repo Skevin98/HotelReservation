@@ -97,7 +97,13 @@ public class User {
     public void setPrivilege(String privilege) {
         Privilege = privilege;
     }
+    public String getUsername() {
+        return Username;
+    }
 
+    public void setUsername(String username) {
+        Username = username;
+    }
     private String Id;
     private String FirebaseId;
     private String Nom;
@@ -109,6 +115,7 @@ public class User {
     private String Mdp;
     private String Sexe;
     private String Privilege;
+    private String Username;
 
 
 }

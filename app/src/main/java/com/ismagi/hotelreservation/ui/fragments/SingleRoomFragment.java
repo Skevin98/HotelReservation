@@ -4,63 +4,54 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ismagi.hotelreservation.DAO.IDao;
+import com.ismagi.hotelreservation.DAO.VolleyCallback;
+import com.ismagi.hotelreservation.Models.Chambre;
 import com.ismagi.hotelreservation.R;
+import com.ismagi.hotelreservation.databinding.FragmentSingleRoomBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SingleRoomFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SingleRoomFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "SingleRoomFragment";
+    FragmentSingleRoomBinding fsrp;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SingleRoomFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SingleRoomFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SingleRoomFragment newInstance(String param1, String param2) {
-        SingleRoomFragment fragment = new SingleRoomFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    IDao<Chambre> DAO;
+    Chambre c = new Chambre();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_single_room, container, false);
+
+        fsrp = FragmentSingleRoomBinding.inflate(inflater, container, false);
+
+
+        String id = "ffffffff-5555-4562-b3fc-2c963f66afa6";
+        DAO.GetById(id,new VolleyCallback<Chambre>() {
+            @Override
+            public void onSuccess(Chambre result) {
+                c = result;
+                Log.i(TAG, "onSuccess by id: "+c.getNbLits());
+            }
+
+            @Override
+            public void onError(String e) {
+                Log.i(TAG, "onError by id: "+e);
+            }
+        });
+
+        return fsrp.getRoot();
     }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+
 }

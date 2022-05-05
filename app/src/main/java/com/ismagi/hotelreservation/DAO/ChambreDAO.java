@@ -22,11 +22,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class ChambreDAO implements IChambreDao {
+public class ChambreDAO implements IChambreDao {
     String url = HttpHelper.GetUrl()+"/Chambre";
     private String TAG = "ChambreDAO";
     private Context context;
@@ -41,7 +42,7 @@ class ChambreDAO implements IChambreDao {
     }
 
     @Override
-    public Chambre GetById(String id) {
+    public void GetById(String id, VolleyCallback callback) {
         Chambre c = new Chambre();
         Categorie cat = new Categorie();
         String GetUrl = url+"/"+id;
@@ -50,24 +51,27 @@ class ChambreDAO implements IChambreDao {
             @Override
             public void onResponse(JSONObject resp) {
                 try {
+                    //Log.i(TAG, "Type of categorie: "+resp);
+                    c.setId(resp.getString("id"));
+                    c.setNumEtage(resp.getInt("numEtage"));
+                    c.setNbLits(resp.getInt("nbLits"));
+                    c.setNumero(resp.getInt("numero"));
 
-                    c.setId(resp.getString("Id"));
-                    c.setNumEtage(resp.getInt("NumEtage"));
-                    c.setNbLits(resp.getInt("NbLits"));
-
-                    JSONObject temp = resp.getJSONObject("Categorie");
-                    cat.setIdCategorie(temp.getString("IdCategorie"));
-                    cat.setLibelle(temp.getString("Libelle"));
-                    cat.setTarif(temp.getDouble("Tarif"));
-                    cat.setDescription(temp.getString("Description"));
+                    JSONObject temp = resp.getJSONObject("categorie");
+                    cat.setIdCategorie(temp.getString("id"));
+                    cat.setLibelle(temp.getString("libelle"));
+                    cat.setTarif(temp.getDouble("tarif"));
+                    cat.setDescription(temp.getString("description"));
                     c.setCategorie(cat);
 
-                    c.setAvailable(resp.getBoolean("IsAvailable"));
-                    c.setHasBalcon(resp.getBoolean("HasBalcon"));
-                    c.setHasVue_sur_mer(resp.getBoolean("HasVue_sur_mer"));
-                    c.setHasSalle_sejour(resp.getBoolean("HasSalle_sejour"));
-                    c.setHasCuisine(resp.getBoolean("HasCuisine"));
+                    c.setAvailable(resp.getBoolean("isAvailable"));
+                    c.setHasBalcon(resp.getBoolean("hasBalcon"));
+                    c.setHasVue_sur_mer(resp.getBoolean("hasVue_sur_mer"));
+                    c.setHasSalle_sejour(resp.getBoolean("hasSalle_sejour"));
+                    c.setHasCuisine(resp.getBoolean("hasCuisine"));
                     Log.i(TAG, "onResponse: Requete envoyée "+c.getId());
+
+                    callback.onSuccess(c);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -104,23 +108,23 @@ class ChambreDAO implements IChambreDao {
         };
 
         requestQueue.add(request);
-        return c;
+        //return c;
 
     }
 
     @Override
-    public void Update(Chambre obj) {
+    public void Update(Chambre obj, String id) {
 
     }
 
     @Override
-    public void Delete(Chambre obj) {
+    public void Delete(String id) {
 
     }
 
     @Override
-    public List<Chambre> GetAll() {
-        List<Chambre> list = null;
+    public void GetAll(VolleyCallback callback) {
+        List<Chambre> list = new ArrayList<>();
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -133,27 +137,30 @@ class ChambreDAO implements IChambreDao {
                         Chambre c = new Chambre();
                         Categorie cat = new Categorie();
                         JSONObject json = resp.getJSONObject(i);
-                        c.setId(json.getString("Id"));
-                        c.setNumEtage(json.getInt("NumEtage"));
-                        c.setNbLits(json.getInt("NbLits"));
+                        c.setId(json.getString("id"));
+                        c.setNumEtage(json.getInt("numEtage"));
+                        c.setNbLits(json.getInt("nbLits"));
+                        c.setNumero(json.getInt("numero"));
 
-                        JSONObject temp = json.getJSONObject("Categorie");
-                        cat.setIdCategorie(temp.getString("IdCategorie"));
-                        cat.setLibelle(temp.getString("Libelle"));
-                        cat.setTarif(temp.getDouble("Tarif"));
-                        cat.setDescription(temp.getString("Description"));
+                        JSONObject temp = json.getJSONObject("categorie");
+                        cat.setIdCategorie(temp.getString("id"));
+                        cat.setLibelle(temp.getString("libelle"));
+                        cat.setTarif(temp.getDouble("tarif"));
+                        cat.setDescription(temp.getString("description"));
                         c.setCategorie(cat);
 
-                        c.setAvailable(json.getBoolean("IsAvailable"));
-                        c.setHasBalcon(json.getBoolean("HasBalcon"));
-                        c.setHasVue_sur_mer(json.getBoolean("HasVue_sur_mer"));
-                        c.setHasSalle_sejour(json.getBoolean("HasSalle_sejour"));
-                        c.setHasCuisine(json.getBoolean("HasCuisine"));
+                        c.setAvailable(json.getBoolean("isAvailable"));
+                        c.setHasBalcon(json.getBoolean("hasBalcon"));
+                        c.setHasVue_sur_mer(json.getBoolean("hasVue_sur_mer"));
+                        c.setHasSalle_sejour(json.getBoolean("hasSalle_sejour"));
+                        c.setHasCuisine(json.getBoolean("hasCuisine"));
                         Log.i(TAG, "onResponse: Requete envoyée "+c.getId());
 
                         list.add(c);
 
                     }
+
+                    callback.onSuccess(list);
 
 
                 } catch (JSONException e) {
@@ -191,18 +198,18 @@ class ChambreDAO implements IChambreDao {
 
         requestQueue.add(request);
 
-        return list;
+        //return list;
     }
 
     @Override
-    public List<Chambre> GetChambreByCategorie(String IdCategorie) {
-        String GetUrl = url+"/ChambreByCategorie/"+IdCategorie;
-        List<Chambre> list = null;
+    public List<Chambre> GetChambreByCategorie(String IdCategorie, VolleyCallback callback) {
+        String GetUrl = url+"/byCategorie/"+IdCategorie;
+        List<Chambre> list = new ArrayList<>();
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, GetUrl,null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray resp) {
                 try {
@@ -210,27 +217,28 @@ class ChambreDAO implements IChambreDao {
                         Chambre c = new Chambre();
                         Categorie cat = new Categorie();
                         JSONObject json = resp.getJSONObject(i);
-                        c.setId(json.getString("Id"));
-                        c.setNumEtage(json.getInt("NumEtage"));
-                        c.setNbLits(json.getInt("NbLits"));
+                        c.setId(json.getString("id"));
+                        c.setNumEtage(json.getInt("numEtage"));
+                        c.setNbLits(json.getInt("nbLits"));
 
-                        JSONObject temp = json.getJSONObject("Categorie");
-                        cat.setIdCategorie(temp.getString("IdCategorie"));
-                        cat.setLibelle(temp.getString("Libelle"));
-                        cat.setTarif(temp.getDouble("Tarif"));
-                        cat.setDescription(temp.getString("Description"));
-                        c.setCategorie(cat);
+                        /*JSONObject temp = json.getJSONObject("categorie");
+                        cat.setIdCategorie(temp.getString("id"));
+                        cat.setLibelle(temp.getString("libelle"));
+                        cat.setTarif(temp.getDouble("tarif"));
+                        cat.setDescription(temp.getString("description"));
+                        c.setCategorie(cat);*/
 
-                        c.setAvailable(json.getBoolean("IsAvailable"));
-                        c.setHasBalcon(json.getBoolean("HasBalcon"));
-                        c.setHasVue_sur_mer(json.getBoolean("HasVue_sur_mer"));
-                        c.setHasSalle_sejour(json.getBoolean("HasSalle_sejour"));
-                        c.setHasCuisine(json.getBoolean("HasCuisine"));
+                        c.setAvailable(json.getBoolean("isAvailable"));
+                        c.setHasBalcon(json.getBoolean("hasBalcon"));
+                        c.setHasVue_sur_mer(json.getBoolean("hasVue_sur_mer"));
+                        c.setHasSalle_sejour(json.getBoolean("hasSalle_sejour"));
+                        c.setHasCuisine(json.getBoolean("hasCuisine"));
                         Log.i(TAG, "onResponse: Requete envoyée "+c.getId());
 
                         list.add(c);
 
                     }
+                    callback.onSuccess(list);
 
 
                 } catch (JSONException e) {
@@ -243,6 +251,7 @@ class ChambreDAO implements IChambreDao {
             public void onErrorResponse(VolleyError error) {
                 if (error == null || error.networkResponse == null) {
                     Log.i(TAG, "onErrorResponse: "+error);
+                    callback.onError(error.toString());
                 }
 
                 String body="";
@@ -255,6 +264,7 @@ class ChambreDAO implements IChambreDao {
                     // exception
                 }
                 Log.i(TAG, "onErrorResponse: "+body);
+                callback.onError(error.toString());
             }
         })
         {

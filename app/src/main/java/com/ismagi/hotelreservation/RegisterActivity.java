@@ -60,8 +60,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         arb.pickerAge.setMinValue(0);
         arb.pickerAge.setMaxValue(200);
 
-        p = new User();
-        p = DAO.GetById("1e3ebf4f-108d-45b5-ad93-868b4e29ce45");
+        //p = new User();
+        //p = DAO.GetById("1e3ebf4f-108d-45b5-ad93-868b4e29ce45");
 
 
     }
@@ -162,6 +162,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private boolean validateUserName(){
+        String nameInput = arb.txtUsernameR.getEditableText().toString().trim();
+
+        if (nameInput.isEmpty()) {
+
+            arb.txtUsernameR.setError("Champ Obligatoire");
+            return false;
+        }
+
+        else{
+            arb.txtUsernameR.setError(null);
+            return true;
+        }
+    }
+
 
 
 
@@ -184,11 +199,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 p.setMail(arb.txtMailRegister.getText().toString());
                 p.setNumero(arb.txtPhone.getText().toString());
                 p.setMdp(arb.txtMdpRegister.getText().toString());
-
+                p.setUsername(arb.txtUsernameR.getText().toString());
                 int SelectedS = arb.radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(SelectedS);
                 p.setSexe(radioButton.getText().toString());
-                if (!validateName() || !validateEmail() || !validatePassword()){
+                if (!validateName() || !validateEmail() || !validatePassword() || !validateUserName()){
 
                     Toast.makeText(RegisterActivity.this," Coordonnées invalides ",Toast.LENGTH_LONG).show();
 
