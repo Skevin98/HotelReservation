@@ -3,11 +3,12 @@ package com.ismagi.hotelreservation.Models;
 
 import java.util.UUID;
 
-public class Personne {
+public class User {
 
-    public Personne(){
+    public User(){
         Id = UUID.randomUUID().toString();
     }
+
 
     public String getId() {
         return Id;
@@ -24,8 +25,6 @@ public class Personne {
     public void setFirebaseId(String firebaseId) {
         FirebaseId = firebaseId;
     }
-
-
 
     public String getNom() {
         return Nom;
@@ -59,6 +58,14 @@ public class Personne {
         Numero = numero;
     }
 
+    public int getAge() {
+        return Age;
+    }
+
+    public void setAge(int age) {
+        Age = age;
+    }
+
     public String getAdresse() {
         return Adresse;
     }
@@ -90,25 +97,25 @@ public class Personne {
     public void setPrivilege(String privilege) {
         Privilege = privilege;
     }
+    public String getUsername() {
+        return Username;
+    }
 
+    public void setUsername(String username) {
+        Username = username;
+    }
     private String Id;
     private String FirebaseId;
     private String Nom;
     private String Prenom;
     private String Mail;
     private String Numero;
-    private int age;
+    private int Age;
     private String Adresse;
     private String Mdp;
     private String Sexe;
     private String Privilege;
+    private String Username;
 
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 }

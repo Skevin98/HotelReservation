@@ -5,7 +5,7 @@
       <map>
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/drawable-v24/ic_modif.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/drawable/ic_contact_mail.xml" value="0.2846153846153846" />
-        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_connexion.xml" value="0.22982456140350876" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_connexion.xml" value="0.33" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_main.xml" value="0.14" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_menu.xml" value="0.309255079006772" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_register.xml" value="0.27291666666666664" />
@@ -13,6 +13,7 @@
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_home.xml" value="0.22982456140350876" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_list_reservation.xml" value="0.12017543859649123" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_list_room.xml" value="0.12017543859649123" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_preferences.xml" value="0.2" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_profil.xml" value="0.33" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_reservation.xml" value="0.12017543859649123" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_single_room.xml" value="0.2179824561403509" />

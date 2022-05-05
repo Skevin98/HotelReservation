@@ -1,13 +1,17 @@
 package com.ismagi.hotelreservation.DAO;
 
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+
 import java.util.List;
 
-interface IDao<T> {
+public interface IDao<T> {
 
     void Add(T obj);
-    T GetById(String id);
-    void Update(T obj);
-    void Delete(T obj);
-    List<T> GetAll();
+    void GetById(String id, VolleyCallback c);
+    void Update(T obj, String id);
+    void Delete(String id);
+    void GetAll(VolleyCallback callback);
 
 }

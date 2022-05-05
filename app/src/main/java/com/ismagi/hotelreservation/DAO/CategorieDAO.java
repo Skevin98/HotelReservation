@@ -14,7 +14,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ismagi.hotelreservation.Models.Categorie;
-import com.ismagi.hotelreservation.Models.Personne;
 import com.ismagi.hotelreservation.Utils.HttpHelper;
 
 import org.json.JSONArray;
@@ -22,15 +21,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class CategorieDAO implements IDao<Categorie> {
+public class CategorieDAO implements IDao<Categorie> {
 
-    String url = HttpHelper.GetUrl()+"/Personne";
+    String url = HttpHelper.GetUrl()+"/Category";
     private String TAG = "CategorieDAO";
     private Context context;
+
+    public CategorieDAO(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void Add(Categorie obj) {
@@ -38,7 +42,7 @@ class CategorieDAO implements IDao<Categorie> {
     }
 
     @Override
-    public Categorie GetById(String id) {
+    public void GetById(String id, VolleyCallback callback) {
         Categorie c = new Categorie();
         String GetUrl = url+"/"+id;
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -46,11 +50,12 @@ class CategorieDAO implements IDao<Categorie> {
             @Override
             public void onResponse(JSONObject resp) {
                 try {
-                    c.setIdCategorie(resp.getString("idCategorie"));
+                    c.setIdCategorie(resp.getString("id"));
                     c.setLibelle(resp.getString("libelle"));
                     c.setTarif(resp.getDouble("tarif"));
                     c.setDescription(resp.getString("description"));
                     Log.i(TAG, "onResponse: Requete envoyée "+c.getLibelle());
+                    callback.onSuccess(c);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -61,6 +66,7 @@ class CategorieDAO implements IDao<Categorie> {
             public void onErrorResponse(VolleyError error) {
                 if (error == null || error.networkResponse == null) {
                     Log.i(TAG, "onErrorResponse: "+error);
+                    callback.onError(error.toString());
                 }
                 else{
                     String body="";
@@ -73,6 +79,7 @@ class CategorieDAO implements IDao<Categorie> {
                         // exception
                     }
                     Log.i(TAG, "onErrorResponse: "+body);
+                    callback.onError(error.toString());
                 }
 
             }
@@ -94,23 +101,23 @@ class CategorieDAO implements IDao<Categorie> {
         };
 
         requestQueue.add(request);
-        return c;
+        //return c;
 
     }
 
     @Override
-    public void Update(Categorie obj) {
+    public void Update(Categorie obj, String id) {
 
     }
 
     @Override
-    public void Delete(Categorie obj) {
+    public void Delete(String id) {
 
     }
 
     @Override
-    public List<Categorie> GetAll() {
-        List<Categorie> list = null;
+    public void GetAll(VolleyCallback callback) {
+        List<Categorie> list = new ArrayList<>();
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -122,7 +129,7 @@ class CategorieDAO implements IDao<Categorie> {
                     for (int i = 0; i < resp.length(); i++){
                         Categorie c = new Categorie();
                         JSONObject json = resp.getJSONObject(i);
-                        c.setIdCategorie(json.getString("idCategorie"));
+                        c.setIdCategorie(json.getString("id"));
                         c.setLibelle(json.getString("libelle"));
                         c.setTarif(json.getDouble("tarif"));
                         c.setDescription(json.getString("description"));
@@ -130,8 +137,10 @@ class CategorieDAO implements IDao<Categorie> {
 
                         list.add(c);
 
-                    }
 
+
+                    }
+                    callback.onSuccess(list);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -143,6 +152,7 @@ class CategorieDAO implements IDao<Categorie> {
             public void onErrorResponse(VolleyError error) {
                 if (error == null || error.networkResponse == null) {
                     Log.i(TAG, "onErrorResponse: "+error);
+                    callback.onError(error.toString());
                 }
 
                 String body="";
@@ -155,6 +165,7 @@ class CategorieDAO implements IDao<Categorie> {
                     // exception
                 }
                 Log.i(TAG, "onErrorResponse: "+body);
+                callback.onError(error.toString());
             }
         }){
             @Override
@@ -168,6 +179,6 @@ class CategorieDAO implements IDao<Categorie> {
 
         requestQueue.add(request);
 
-        return list;
+        //return list;
     }
 }

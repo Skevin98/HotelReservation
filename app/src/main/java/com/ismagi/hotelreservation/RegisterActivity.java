@@ -2,7 +2,6 @@ package com.ismagi.hotelreservation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -17,8 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.ismagi.hotelreservation.DAO.IDao;
 import com.ismagi.hotelreservation.DAO.PersonneDAO;
-import com.ismagi.hotelreservation.Models.Personne;
+import com.ismagi.hotelreservation.Models.User;
 import com.ismagi.hotelreservation.databinding.ActivityRegisterBinding;
 
 import java.util.regex.Pattern;
@@ -30,12 +30,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private RadioButton radioButton;
 
-    PersonneDAO DAO;
+    IDao<User> DAO;
 
     final String TAG = "RegisterActivity";
 
 
-    Personne p;
+    User p;
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{8,}$");
@@ -60,14 +60,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         arb.pickerAge.setMinValue(0);
         arb.pickerAge.setMaxValue(200);
 
-        p = new Personne();
-        p = DAO.GetById("1e3ebf4f-108d-45b5-ad93-868b4e29ce45");
+        //p = new User();
+        //p = DAO.GetById("1e3ebf4f-108d-45b5-ad93-868b4e29ce45");
 
 
     }
 
 
-    public void register(Personne p){
+    public void register(User p){
         mAuth.createUserWithEmailAndPassword(p.getMail(), p.getMdp())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -162,6 +162,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private boolean validateUserName(){
+        String nameInput = arb.txtUsernameR.getEditableText().toString().trim();
+
+        if (nameInput.isEmpty()) {
+
+            arb.txtUsernameR.setError("Champ Obligatoire");
+            return false;
+        }
+
+        else{
+            arb.txtUsernameR.setError(null);
+            return true;
+        }
+    }
+
 
 
 
@@ -172,7 +187,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()){
             case R.id.btn_create:
 
-                p = new Personne();
+                p = new User();
 //                p = DAO.GetById("1e3ebf4f-108d-45b5-ad93-868b4e29ce45");
 //                Log.i(TAG, "onClick: "+p.getNom());
 
@@ -184,11 +199,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 p.setMail(arb.txtMailRegister.getText().toString());
                 p.setNumero(arb.txtPhone.getText().toString());
                 p.setMdp(arb.txtMdpRegister.getText().toString());
-
+                p.setUsername(arb.txtUsernameR.getText().toString());
                 int SelectedS = arb.radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(SelectedS);
                 p.setSexe(radioButton.getText().toString());
-                if (!validateName() || !validateEmail() || !validatePassword()){
+                if (!validateName() || !validateEmail() || !validatePassword() || !validateUserName()){
 
                     Toast.makeText(RegisterActivity.this," Coordonnées invalides ",Toast.LENGTH_LONG).show();
 

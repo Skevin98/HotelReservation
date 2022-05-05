@@ -6,63 +6,95 @@ import java.util.UUID;
 public class Reservation {
 
     public Reservation() {
-        this.idReservation = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString();
     }
 
-    public String getIdReservation() {
-        return idReservation;
+    public String getId() {
+        return id;
     }
 
-    public void setIdReservation(String idReservation) {
-        this.idReservation = idReservation;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Chambre[] getChambres() {
-        return chambres;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setChambres(Chambre[] chambres) {
-        this.chambres = chambres;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
-    public Date getDateReservation() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getIdChambre() {
+        return idChambre;
+    }
+
+    public void setIdChambre(String idChambre) {
+        this.idChambre = idChambre;
+    }
+
+    public Chambre getChambre() {
+        return chambre;
+    }
+
+    public void setChambre(Chambre chambre) {
+        this.chambre = chambre;
+    }
+
+    public String getDateReservation() {
         return dateReservation;
     }
 
-    public void setDateReservation(Date dateReservation) {
+    public void setDateReservation(String dateReservation) {
         this.dateReservation = dateReservation;
     }
 
-    public Date getDateEntree() {
+    public String getDateEntree() {
         return dateEntree;
     }
 
-    public void setDateEntree(Date dateEntree) {
+    public void setDateEntree(String dateEntree) {
         this.dateEntree = dateEntree;
     }
 
-    public Date getDateSortie() {
+    public String getDateSortie() {
         return dateSortie;
     }
 
-    public void setDateSortie(Date dateSortie) {
+    public void setDateSortie(String dateSortie) {
         this.dateSortie = dateSortie;
     }
 
-    public boolean isEtat() {
-        return etat;
+    public boolean isActive() {
+        return isActive;
     }
 
-    public void setEtat(boolean etat) {
-        this.etat = etat;
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
-    public Personne[] getClients() {
-        return clients;
+    public int getNbEnfant() {
+        return nbEnfant;
     }
 
-    public void setClients(Personne[] clients) {
-        this.clients = clients;
+    public void setNbEnfant(int nbEnfant) {
+        this.nbEnfant = nbEnfant;
+    }
+
+    public int getNbAdult() {
+        return nbAdult;
+    }
+
+    public void setNbAdult(int nbAdult) {
+        this.nbAdult = nbAdult;
     }
 
     public double getMontant() {
@@ -73,12 +105,16 @@ public class Reservation {
         this.montant = montant;
     }
 
-    String idReservation;
-    Chambre[] chambres = null;
-    Date dateReservation;
-    Date dateEntree;
-    Date dateSortie;
-    boolean etat;
-    Personne[] clients = null;
+    String id;
+    String idUser;
+    User user = new User();
+    String idChambre;
+    Chambre chambre = new Chambre();
+    String dateReservation;
+    String dateEntree;
+    String dateSortie;
+    boolean isActive;
+    int nbEnfant;
+    int nbAdult;
     double montant;
 }

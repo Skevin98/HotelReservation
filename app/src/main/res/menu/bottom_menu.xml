@@ -8,7 +8,7 @@
     <item
         android:title="Mes reservations"
         android:icon="@drawable/ic_baseline_meeting"
-        android:id="@+id/reservationFragment">
+        android:id="@+id/listReservationFragment">
     </item>
     <item
         android:title="Mon profil"

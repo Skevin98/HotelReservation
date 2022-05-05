@@ -2,65 +2,121 @@ package com.ismagi.hotelreservation.ui.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.ismagi.hotelreservation.DAO.IDao;
+import com.ismagi.hotelreservation.DAO.PersonneDAO;
+import com.ismagi.hotelreservation.DAO.VolleyCallback;
+import com.ismagi.hotelreservation.Models.User;
 import com.ismagi.hotelreservation.R;
+import com.ismagi.hotelreservation.databinding.ActivityMenuBinding;
+import com.ismagi.hotelreservation.databinding.FragmentProfilBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfilFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ProfilFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class ProfilFragment extends Fragment implements View.OnClickListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String TAG = "ProfilFragment";
+    private FragmentProfilBinding fpb;
 
-    public ProfilFragment() {
-        // Required empty public constructor
-    }
+    IDao<User> DAO;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfilFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProfilFragment newInstance(String param1, String param2) {
-        ProfilFragment fragment = new ProfilFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    User u = new User();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profil, container, false);
+        fpb = FragmentProfilBinding.inflate(inflater, container, false);
+        fpb.propos.setOnClickListener(this);
+        DAO = new PersonneDAO(getContext());
+        String id = "38d89168-4677-47b2-bf61-cfeb53410671";
+
+        //User temp = new User();
+        //temp.setId("66666666-5717-4562-b3fc-2c963f66afa6");
+//        temp.setFirebaseId("Fonctionne");
+//        temp.setMail("Kevin@gmail.com");
+//        temp.setAge(100);
+//        temp.setPrenom("Android");
+
+
+        //Update user exemple
+        //DAO.Update(temp,"66666666-5717-4562-b3fc-2c963f66afa6");
+
+        /*DAO.GetById("66666666-5717-4562-b3fc-2c963f66afa6", new VolleyCallback<User>() {
+            @Override
+            public void onSuccess(User result) {
+                Log.i(TAG, "onSuccess: update " + result.getMail());
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });*/
+
+        //Delete user exemple
+        //DAO.Delete("66666666-5717-4562-b3fc-2c963f66afa6");
+
+
+        //GetById exemple
+        DAO.GetById(id, new VolleyCallback<User>() {
+            @Override
+            public void onSuccess(User result) {
+                u = result;
+                Log.i(TAG, "OnSuccess: Firebase id de l'user "+u.getFirebaseId());
+
+                fpb.txtPNom.setText(u.getNom());
+                fpb.txtPPrenom.setText(u.getPrenom());
+                fpb.txtPUsername.setText(u.getUsername());
+                fpb.txtPTel.setText(u.getNumero());
+                fpb.txtPMail.setText(u.getMail());
+                fpb.txtPAdresse.setText(u.getAdresse());
+                fpb.txtPSexe.setText(u.getSexe());
+                fpb.txtPYear.setText(String.valueOf(u.getAge()));
+            }
+
+            @Override
+            public void onError(String e) {
+                Log.i(TAG, "Erreur :"+e);
+            }
+        });
+
+
+        return fpb.getRoot();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.propos:
+                Toast.makeText(getContext(), "Application de fin de module", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.txt_p_username:
+                openDialogUSer();
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    private void openDialogUSer() {
+
     }
 }

@@ -4,63 +4,147 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ismagi.hotelreservation.DAO.CategorieDAO;
+import com.ismagi.hotelreservation.DAO.ChambreDAO;
+import com.ismagi.hotelreservation.DAO.IChambreDao;
+import com.ismagi.hotelreservation.DAO.IDao;
+import com.ismagi.hotelreservation.DAO.PersonneDAO;
+import com.ismagi.hotelreservation.DAO.VolleyCallback;
+import com.ismagi.hotelreservation.Models.Categorie;
+import com.ismagi.hotelreservation.Models.Chambre;
 import com.ismagi.hotelreservation.R;
+import com.ismagi.hotelreservation.databinding.FragmentListRoomBinding;
+import com.ismagi.hotelreservation.databinding.FragmentProfilBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ListRoomFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class ListRoomFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "RoomFragment";
+    List<Chambre> chambres = new ArrayList<>();
+    List<Chambre> chambresByCat = new ArrayList<>();
+    Chambre c = new Chambre();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    List<Categorie> categories = new ArrayList<>();
+    Categorie cat = new Categorie();
 
-    public ListRoomFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ListRoomFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ListRoomFragment newInstance(String param1, String param2) {
-        ListRoomFragment fragment = new ListRoomFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    IChambreDao DAO;
+    IDao<Categorie> DAOCat;
+    private FragmentListRoomBinding frb;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_room, container, false);
+        frb = FragmentListRoomBinding.inflate(inflater, container, false);
+
+        //String id = "ffffffff-2222-4562-b3fc-2c963f66afa6";
+        String idCat = "cccccccc-5717-4562-b3fc-2c963f66afa6";
+
+        DAO = new ChambreDAO(getContext());
+
+        DAOCat = new CategorieDAO(getContext());
+
+
+        //get all categories
+        DAOCat.GetAll(new VolleyCallback<List<Categorie>>() {
+            @Override
+            public void onSuccess(List<Categorie> result) {
+
+                //Si la requete passe avec succès, les données seront accessibles dans result
+                categories = result;
+                Log.i(TAG, "Liste des categories: "+categories.size());
+            }
+
+            @Override
+            public void onError(String e) {
+                Log.i(TAG, "onError: "+e);
+                //En cas d'echec, prevoir l'affichage d'un message d'erreur ou tout autre procedure ici
+            }
+        });
+
+        //get catecorie by id
+        DAOCat.GetById(idCat,new VolleyCallback<Categorie>() {
+            @Override
+            public void onSuccess(Categorie result) {
+                //Si la requete passe avec succès, les données seront accessibles dans result
+
+                cat = result;
+                Log.i(TAG, "onSuccess by id cat: "+cat.getLibelle());
+                //Faire les traitements ici
+            }
+
+            @Override
+            public void onError(String e) {
+                Log.i(TAG, "onError: "+e);
+                //En cas d'echec, prevoir l'affichage d'un message d'erreur ou tout autre procedure ici
+            }
+        });
+
+
+        //Get ALl Chambre
+        /*DAO.GetAll(new VolleyCallback<List<Chambre>>() {
+            @Override
+            public void onSuccess(List<Chambre> result) {
+            //Si la requete passe avec succès, les données seront accessibles dans result
+                chambres = result;
+                Log.i(TAG, "onSuccess: "+chambres.get(0).getCategorie().getLibelle());
+            }
+
+            @Override
+            public void onError(String e) {
+                Log.i(TAG, "onError: "+e);
+                //En cas d'echec, prevoir l'affichage d'un message d'erreur ou tout autre procedure ici
+            }
+        });*/
+
+        //Get chambre by id
+        /*DAO.GetById(id,new VolleyCallback<Chambre>() {
+            @Override
+            public void onSuccess(Chambre result) {
+            //Si la requete passe avec succès, les données seront accessibles dans result
+                c = result;
+                Log.i(TAG, "onSuccess by id: "+c.getNbLits());
+            }
+
+            @Override
+            public void onError(String e) {
+                Log.i(TAG, "onError by id: "+e);
+                //En cas d'echec, prevoir l'affichage d'un message d'erreur ou tout autre procedure ici
+            }
+        });*/
+
+        //get chambres by categorie
+        DAO.GetChambreByCategorie(idCat, new VolleyCallback<List<Chambre>>() {
+            @Override
+            public void onSuccess(List<Chambre> result) {
+                //Si la requete passe avec succès, les données seront accessibles dans result
+                chambresByCat = result;
+                Log.i(TAG, "onSuccess: Liste des chambres by cat "+chambresByCat.size());
+            }
+
+            @Override
+            public void onError(String e) {
+                Log.i(TAG, "onError: "+e);
+                //En cas d'echec, prevoir l'affichage d'un message d'erreur ou tout autre procedure ici
+            }
+        });
+
+        return frb.getRoot();
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+
 }
