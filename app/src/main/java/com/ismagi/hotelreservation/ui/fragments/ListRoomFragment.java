@@ -1,25 +1,21 @@
 package com.ismagi.hotelreservation.ui.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.ismagi.hotelreservation.DAO.CategorieDAO;
 import com.ismagi.hotelreservation.DAO.ChambreDAO;
 import com.ismagi.hotelreservation.DAO.IChambreDao;
 import com.ismagi.hotelreservation.DAO.IDao;
-import com.ismagi.hotelreservation.DAO.PersonneDAO;
 import com.ismagi.hotelreservation.DAO.VolleyCallback;
-import com.ismagi.hotelreservation.Models.Categorie;
-import com.ismagi.hotelreservation.Models.Chambre;
-import com.ismagi.hotelreservation.R;
+import com.ismagi.hotelreservation.models.Categorie;
+import com.ismagi.hotelreservation.models.Chambre;
 import com.ismagi.hotelreservation.databinding.FragmentListRoomBinding;
-import com.ismagi.hotelreservation.databinding.FragmentProfilBinding;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.ismagi.hotelreservation.DAO;
 
-import com.ismagi.hotelreservation.Models.Chambre;
+import com.ismagi.hotelreservation.models.Chambre;
 
 import java.util.List;
 

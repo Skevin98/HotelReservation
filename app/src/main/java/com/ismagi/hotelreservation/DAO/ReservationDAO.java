@@ -14,8 +14,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.ismagi.hotelreservation.Models.Reservation;
-import com.ismagi.hotelreservation.Models.User;
+import com.ismagi.hotelreservation.models.Reservation;
 import com.ismagi.hotelreservation.Utils.HttpHelper;
 
 import org.json.JSONArray;
@@ -24,11 +23,8 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -363,6 +359,73 @@ public class ReservationDAO implements IReservationDAO {
     @Override
     public void GetReservationByUser(String idUser, VolleyCallback callback) {
 
-        //A implementer dans l'ASP
+        List<Reservation> list = new ArrayList<>();
+        String GetUrl = url+"/byUser/"+idUser;
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, GetUrl,null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray resp) {
+                try {
+                    Log.i(TAG, "Reponse : "+resp.length());
+                    for (int i = 0; i < resp.length(); i++){
+                        Reservation r = new Reservation();
+                        JSONObject json = resp.getJSONObject(i);
+                        //Log.i(TAG, "Reponse : "+json.getString("age"));
+                        r.setId(json.getString("id"));
+                        r.setIdUser(json.getString("userID"));
+                        r.setIdChambre(json.getString("chambreId"));
+                        r.setDateReservation(json.getString("dateReservation"));
+                        r.setDateEntree(json.getString("dateEntree"));
+                        r.setDateSortie(json.getString("dateSortie"));
+                        r.setActive(json.getBoolean("isActive"));
+                        r.setMontant(json.getDouble("montant"));
+                        r.setNbAdult(json.getInt("nb_Adults"));
+                        r.setNbEnfant(json.getInt("nb_Enfants"));
+                        list.add(r);
+
+                        Log.i(TAG, "Element : "+i+" : "+r.getId());
+
+                    }
+                    //Log.i(TAG, "DAO: List des users "+ list.get(0).getMail());
+                    callback.onSuccess(list);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error == null || error.networkResponse == null) {
+                    Log.i(TAG, "onErrorResponse: "+error);
+                    callback.onError(error.toString());
+                }
+
+                String body="";
+                //get status code here
+                final String statusCode = String.valueOf(error.networkResponse.statusCode);
+                //get response body and parse with appropriate encoding
+                try {
+                    body = new String(error.networkResponse.data,"UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    // exception
+                }
+                Log.i(TAG, "onErrorResponse: "+body);
+                callback.onError(error.toString());
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+
+
+        requestQueue.add(request);
     }
 }

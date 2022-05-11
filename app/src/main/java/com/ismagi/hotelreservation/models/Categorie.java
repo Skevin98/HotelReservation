@@ -1,4 +1,4 @@
-package com.ismagi.hotelreservation.Models;
+package com.ismagi.hotelreservation.models;
 
 public class Categorie {
 

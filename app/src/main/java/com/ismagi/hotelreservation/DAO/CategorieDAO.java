@@ -13,7 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.ismagi.hotelreservation.Models.Categorie;
+import com.ismagi.hotelreservation.models.Categorie;
 import com.ismagi.hotelreservation.Utils.HttpHelper;
 
 import org.json.JSONArray;

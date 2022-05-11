@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 
 import com.ismagi.hotelreservation.DAO.IDao;
 import com.ismagi.hotelreservation.DAO.VolleyCallback;
-import com.ismagi.hotelreservation.Models.Chambre;
-import com.ismagi.hotelreservation.R;
+import com.ismagi.hotelreservation.models.Chambre;
 import com.ismagi.hotelreservation.databinding.FragmentSingleRoomBinding;
 
 public class SingleRoomFragment extends Fragment {

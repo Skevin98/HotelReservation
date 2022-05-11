@@ -5,22 +5,15 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ismagi.hotelreservation.DAO.IDao;
-import com.ismagi.hotelreservation.DAO.PersonneDAO;
-import com.ismagi.hotelreservation.DAO.VolleyCallback;
-import com.ismagi.hotelreservation.Models.User;
+import com.ismagi.hotelreservation.MenuActivity;
+import com.ismagi.hotelreservation.models.User;
 import com.ismagi.hotelreservation.R;
-import com.ismagi.hotelreservation.databinding.ActivityMenuBinding;
 import com.ismagi.hotelreservation.databinding.FragmentProfilBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProfilFragment extends Fragment implements View.OnClickListener {
 
@@ -37,8 +30,23 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         fpb = FragmentProfilBinding.inflate(inflater, container, false);
         fpb.propos.setOnClickListener(this);
-        DAO = new PersonneDAO(getContext());
-        String id = "38d89168-4677-47b2-bf61-cfeb53410671";
+        //DAO = new PersonneDAO(getContext());
+        //String id = "38d89168-4677-47b2-bf61-cfeb53410671";
+        try {
+            u = ((MenuActivity) getActivity()).getUser();
+            fpb.txtPNom.setText(u.getNom());
+            fpb.txtPPrenom.setText(u.getPrenom());
+            fpb.txtPUsername.setText(u.getUsername());
+            fpb.txtPTel.setText(u.getNumero());
+            fpb.txtPMail.setText(u.getMail());
+            fpb.txtPAdresse.setText(u.getAdresse());
+            fpb.txtPSexe.setText(u.getSexe());
+            fpb.txtPYear.setText(String.valueOf(u.getAge()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
         //User temp = new User();
         //temp.setId("66666666-5717-4562-b3fc-2c963f66afa6");
@@ -68,27 +76,27 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
 
 
         //GetById exemple
-        DAO.GetById(id, new VolleyCallback<User>() {
-            @Override
-            public void onSuccess(User result) {
-                u = result;
-                Log.i(TAG, "OnSuccess: Firebase id de l'user "+u.getFirebaseId());
-
-                fpb.txtPNom.setText(u.getNom());
-                fpb.txtPPrenom.setText(u.getPrenom());
-                fpb.txtPUsername.setText(u.getUsername());
-                fpb.txtPTel.setText(u.getNumero());
-                fpb.txtPMail.setText(u.getMail());
-                fpb.txtPAdresse.setText(u.getAdresse());
-                fpb.txtPSexe.setText(u.getSexe());
-                fpb.txtPYear.setText(String.valueOf(u.getAge()));
-            }
-
-            @Override
-            public void onError(String e) {
-                Log.i(TAG, "Erreur :"+e);
-            }
-        });
+//        DAO.GetById(id, new VolleyCallback<User>() {
+//            @Override
+//            public void onSuccess(User result) {
+//                u = result;
+//                Log.i(TAG, "OnSuccess: Firebase id de l'user "+u.getFirebaseId());
+//
+//                fpb.txtPNom.setText(u.getNom());
+//                fpb.txtPPrenom.setText(u.getPrenom());
+//                fpb.txtPUsername.setText(u.getUsername());
+//                fpb.txtPTel.setText(u.getNumero());
+//                fpb.txtPMail.setText(u.getMail());
+//                fpb.txtPAdresse.setText(u.getAdresse());
+//                fpb.txtPSexe.setText(u.getSexe());
+//                fpb.txtPYear.setText(String.valueOf(u.getAge()));
+//            }
+//
+//            @Override
+//            public void onError(String e) {
+//                Log.i(TAG, "Erreur :"+e);
+//            }
+//        });
 
 
         return fpb.getRoot();
@@ -103,10 +111,6 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
-            case R.id.propos:
-                Toast.makeText(getContext(), "Application de fin de module", Toast.LENGTH_LONG).show();
-                break;
             case R.id.txt_p_username:
                 openDialogUSer();
                 break;

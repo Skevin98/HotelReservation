@@ -16,17 +16,23 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ismagi.hotelreservation.DAO.IDao;
 import com.ismagi.hotelreservation.DAO.PersonneDAO;
-import com.ismagi.hotelreservation.Models.User;
+import com.ismagi.hotelreservation.models.User;
 import com.ismagi.hotelreservation.databinding.ActivityRegisterBinding;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityRegisterBinding arb;
+
+    DatabaseReference ref;
+    FirebaseDatabase mData;
 
     private RadioButton radioButton;
 
@@ -77,17 +83,31 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             p.setFirebaseId(user.getUid());
-                            try {
-                                DAO.Add(p);
-                                Intent activit = new Intent(getApplicationContext(), MenuActivity.class);
-                                activit.putExtra("idUser",p.getId());
-                                Log.i("RegisterActivity", "Compte créé avec succès");
-                                getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(activit);
+                            String userId = user.getUid();
+                            mData = FirebaseDatabase.getInstance();
+                            ref = mData.getReference("Users").child(userId);
 
-                            } finally {
-                                finish();
-                            }
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("idAPI", p.getId());
+                            hashMap.put("mail", p.getMail());
+
+                            ref.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    try {
+                                        DAO.Add(p);
+                                        Intent activit = new Intent(getApplicationContext(), MenuActivity.class);
+                                        activit.putExtra("idUser",p.getId());
+                                        Log.i("RegisterActivity", "Compte créé avec succès");
+                                        getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(activit);
+
+                                    } finally {
+                                        finish();
+                                    }
+
+                                }
+                            });
 
                         } else {
 

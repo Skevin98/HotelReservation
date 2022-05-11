@@ -1,4 +1,4 @@
-package com.ismagi.hotelreservation.Models;
+package com.ismagi.hotelreservation.models;
 
 public class Chambre {
 
@@ -34,11 +34,11 @@ public class Chambre {
         NbLits = nbLits;
     }
 
-    public com.ismagi.hotelreservation.Models.Categorie getCategorie() {
+    public com.ismagi.hotelreservation.models.Categorie getCategorie() {
         return Categorie;
     }
 
-    public void setCategorie(com.ismagi.hotelreservation.Models.Categorie categorie) {
+    public void setCategorie(com.ismagi.hotelreservation.models.Categorie categorie) {
         Categorie = categorie;
     }
 

@@ -3,8 +3,6 @@ package com.ismagi.hotelreservation.DAO;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,8 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.ismagi.hotelreservation.Models.Categorie;
-import com.ismagi.hotelreservation.Models.Chambre;
+import com.ismagi.hotelreservation.models.Categorie;
+import com.ismagi.hotelreservation.models.Chambre;
 import com.ismagi.hotelreservation.Utils.HttpHelper;
 
 import org.json.JSONArray;

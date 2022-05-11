@@ -1,9 +1,12 @@
-package com.ismagi.hotelreservation.Models;
+package com.ismagi.hotelreservation.models;
 
-import java.util.Date;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.UUID;
 
-public class Reservation {
+
+public class Reservation implements Parcelable {
 
     public Reservation() {
         this.id = UUID.randomUUID().toString();
@@ -117,4 +120,14 @@ public class Reservation {
     int nbEnfant;
     int nbAdult;
     double montant;
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+    }
 }

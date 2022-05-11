@@ -1,4 +1,4 @@
-package com.ismagi.hotelreservation.Models;
+package com.ismagi.hotelreservation.models;
 
 
 import java.util.UUID;

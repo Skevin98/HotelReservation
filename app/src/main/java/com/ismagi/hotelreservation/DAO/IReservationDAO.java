@@ -1,6 +1,6 @@
 package com.ismagi.hotelreservation.DAO;
 
-import com.ismagi.hotelreservation.Models.Reservation;
+import com.ismagi.hotelreservation.models.Reservation;
 
 public interface IReservationDAO extends IDao<Reservation> {
 

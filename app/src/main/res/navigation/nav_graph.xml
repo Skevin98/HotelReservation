@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/profilFragment">
+    app:startDestination="@id/preferencesFragment">
 
     <fragment
         android:id="@+id/profilFragment"
@@ -21,9 +21,10 @@
         tools:layout="@layout/fragment_list_reservation" >
         <action
             android:id="@+id/action_listReservationFragment_to_singleReservationFragment"
-            app:destination="@id/singleReservationFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:destination="@id/singleReservationFragment" />
+        <action
+            android:id="@+id/action_listReservationFragment_to_categorieFragment"
+            app:destination="@id/categorieFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleReservationFragment"
@@ -33,35 +34,15 @@
         <action
             android:id="@+id/action_singleReservationFragment_to_listReservationFragment"
             app:destination="@id/listReservationFragment" />
+        <argument
+            android:name="selectedReservation"
+            app:argType="com.ismagi.hotelreservation.models.Reservation" />
     </fragment>
     <fragment
-        android:id="@+id/listRoomFragment"
-        android:name="com.ismagi.hotelreservation.ui.fragments.ListRoomFragment"
-        android:label="fragment_list_room"
-        tools:layout="@layout/fragment_list_room" >
-        <action
-            android:id="@+id/action_listRoomFragment_to_singleRoomFragment"
-            app:destination="@id/singleRoomFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/singleRoomFragment"
-        android:name="com.ismagi.hotelreservation.ui.fragments.SingleRoomFragment"
-        android:label="fragment_single_room"
-        tools:layout="@layout/fragment_single_room" >
-        <action
-            android:id="@+id/action_singleRoomFragment_to_listRoomFragment"
-            app:destination="@id/listRoomFragment" />
-        <action
-            android:id="@+id/action_singleRoomFragment_to_reservationFragment2"
-            app:destination="@id/reservationFragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/reservationFragment2"
+        android:id="@+id/reservationFragment"
         android:name="com.ismagi.hotelreservation.ui.fragments.ReservationFragment"
         android:label="fragment_reservation"
-        tools:layout="@layout/fragment_reservation" >
+        tools:layout="@layout/fragment_reservation">
         <action
             android:id="@+id/action_reservationFragment2_to_listReservationFragment"
             app:destination="@id/listReservationFragment" />
@@ -74,5 +55,17 @@
         <action
             android:id="@+id/action_preferencesFragment_to_profilFragment"
             app:destination="@id/profilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categorieFragment"
+        android:name="com.ismagi.hotelreservation.ui.fragments.CategorieFragment"
+        android:label="fragment_categorie"
+        tools:layout="@layout/fragment_categorie" >
+        <action
+            android:id="@+id/action_categorieFragment_to_reservationFragment"
+            app:destination="@id/reservationFragment" />
+        <action
+            android:id="@+id/action_categorieFragment_to_listReservationFragment"
+            app:destination="@id/listReservationFragment" />
     </fragment>
 </navigation>
