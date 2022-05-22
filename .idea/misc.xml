@@ -3,27 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/SAWADOGO/.gradle/caches/transforms-3/bebc0834cd196ae261d07ebd280c427d/transformed/appcompat-1.4.1/res/layout/support_simple_spinner_dropdown_item.xml" value="0.13125" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/drawable-v24/ic_modif.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/drawable/ic_contact_mail.xml" value="0.2846153846153846" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_connexion.xml" value="0.33" />
-        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_create_reservation.xml" value="0.12395833333333334" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_create_reservation.xml" value="0.25" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_main.xml" value="0.14" />
-        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_menu.xml" value="0.309255079006772" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_menu.xml" value="0.2595936794582393" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_register.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/activity_reset_password.xml" value="0.22" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/categorie_item.xml" value="0.1" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_categorie.xml" value="0.33" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_home.xml" value="0.22982456140350876" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_list_categorie.xml" value="0.13697916666666668" />
-        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_list_reservation.xml" value="0.16" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_list_reservation.xml" value="0.2" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_list_room.xml" value="0.12017543859649123" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_preferences.xml" value="0.2" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_profil.xml" value="0.33" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_reservation.xml" value="0.12017543859649123" />
-        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_single_reservation.xml" value="0.12395833333333334" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_single_reservation.xml" value="0.33" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/fragment_single_room.xml" value="0.2179824561403509" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/nav_header.xml" value="0.22982456140350876" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/reservation_item.xml" value="0.25" />
+        <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/layout/spinner_item.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/menu/bottom_menu.xml" value="0.12017543859649123" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/menu/drawer_menu.xml" value="0.22" />
         <entry key="..\:/Users/SAWADOGO/AndroidStudioProjects/HotelReservation/app/src/main/res/menu/profil_menu.xml" value="0.14270833333333333" />

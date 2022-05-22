@@ -12,32 +12,44 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelReservation"
         android:usesCleartextTraffic="true">
+
+
         <activity
             android:name=".RegisterActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
 
 
         </activity>
         <activity android:name=".ConnexionActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
             android:exported="true"
             >
 
         </activity>
         <activity
             android:name=".CreateReservationActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
             android:exported="true" />
         <activity
             android:name=".ResetPasswordActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
             android:exported="true" />
         <activity
             android:name=".MenuActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
 
         </activity>
+
+
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Design.NoActionBar">
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -82,6 +82,11 @@ public class Chambre {
         HasCuisine = hasCuisine;
     }
 
+    @Override
+    public String toString()  {
+        return this.getId();
+    }
+
     String Id;
     int Numero;
     int NumEtage;

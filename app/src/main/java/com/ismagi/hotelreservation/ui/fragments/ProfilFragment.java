@@ -42,6 +42,7 @@ public class ProfilFragment extends Fragment implements View.OnClickListener {
             fpb.txtPAdresse.setText(u.getAdresse());
             fpb.txtPSexe.setText(u.getSexe());
             fpb.txtPYear.setText(String.valueOf(u.getAge()));
+            fpb.txtPMdp.setText(String.valueOf(u.getMdp()));
         } catch (Exception e) {
             e.printStackTrace();
         }

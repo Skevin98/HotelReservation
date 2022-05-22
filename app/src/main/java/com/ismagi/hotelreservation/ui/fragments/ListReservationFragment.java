@@ -19,6 +19,7 @@ import com.ismagi.hotelreservation.R;
 import com.ismagi.hotelreservation.adapters.ReservationAdapter;
 import com.ismagi.hotelreservation.models.Reservation;
 import com.ismagi.hotelreservation.databinding.FragmentListReservationBinding;
+import com.ismagi.hotelreservation.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,8 @@ public class ListReservationFragment extends Fragment implements View.OnClickLis
     FragmentListReservationBinding frb;
     public ReservationAdapter adapter;
 
+    User u = new User();
+
     IReservationDAO DAO;
     Reservation r = new Reservation();
     List<Reservation> reservations = new ArrayList<>();
@@ -42,13 +45,26 @@ public class ListReservationFragment extends Fragment implements View.OnClickLis
         frb = FragmentListReservationBinding.inflate(inflater, container, false);
         frb.ResRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new ReservationAdapter(getContext());
-        reservations = ((MenuActivity) getActivity()).GetReservations();
+        DAO = new ReservationDAO(getContext());
 
-        adapter.setReservations(reservations);
-        Log.i(TAG, "onCreateView: "+adapter.getItemCount());
+        DAO.GetReservationByUser(u.getId(), new VolleyCallback<List<Reservation>>() {
 
-        frb.setAdapter(adapter);
+            @Override
+            public void onSuccess(List<Reservation> result) {
+                reservations = result;
+                Log.i(TAG, "DAO res 55: "+reservations.size());
+                Log.i(TAG, "loadReservation: appelé");
+                adapter.setReservations(reservations);
+                Log.i(TAG, "onCreateView: "+adapter.getItemCount());
 
+                frb.setAdapter(adapter);
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
 
 
 
@@ -122,7 +138,33 @@ public class ListReservationFragment extends Fragment implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        u = ((MenuActivity) getActivity()).getUser();
+        //reservations = ((MenuActivity) getActivity()).GetReservations();
+        Log.i(TAG, "onCreate: user "+u.getId());
+
     }
+
+    /*public void loadReservation(){
+
+        DAO = new ReservationDAO(getContext());
+
+        DAO.GetReservationByUser(u.getId(), new VolleyCallback<List<Reservation>>() {
+
+            @Override
+            public void onSuccess(List<Reservation> result) {
+                reservations = result;
+                Log.i(TAG, "DAO res 184: "+reservations.size());
+                Log.i(TAG, "loadReservation: appelé");
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }*/
+
+
 
 
     @Override
@@ -130,6 +172,7 @@ public class ListReservationFragment extends Fragment implements View.OnClickLis
         switch (view.getId()){
             case R.id.f_btn_create:
                 Navigation.findNavController(view).navigate(R.id.action_listReservationFragment_to_categorieFragment);
+                break;
         }
 
     }

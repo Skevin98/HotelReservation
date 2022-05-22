@@ -50,7 +50,7 @@ public class PreferencesFragment extends Fragment implements View.OnClickListene
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder.setTitle("Deconnexion");
         alertDialogBuilder.setMessage("se deconnecter ?");
-        alertDialogBuilder.setCancelable(false);
+        //alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -57,7 +57,7 @@ public class MenuActivity extends AppCompatActivity {
 
         navController = Navigation.findNavController(this,R.id.fragmentContainerView);
         NavigationUI.setupWithNavController(amd.BottomNavigationView,navController);
-        NavigationUI.setupActionBarWithNavController(this,navController);
+        //NavigationUI.setupActionBarWithNavController(this,navController);
 
         mData = FirebaseDatabase.getInstance();
 
@@ -81,12 +81,15 @@ public class MenuActivity extends AppCompatActivity {
                         public void onSuccess(User result) {
                             u = result;
 
-                            Log.i(TAG, "onCreate: Firebase id de l'user "+u.getFirebaseId());
+                            Log.i(TAG, "onCreate: Firebase id de l'user "+u.getId());
 
 
-                            DAORes = new ReservationDAO(getApplicationContext());
+                            //loadReservation();
 
-                            DAORes.GetReservationByUser(u.getId(), new VolleyCallback<List<Reservation>>() {
+
+                            //DAORes = new ReservationDAO(getApplicationContext());
+
+                            /*DAORes.GetReservationByUser(u.getId(), new VolleyCallback<List<Reservation>>() {
 
                                 @Override
                                 public void onSuccess(List<Reservation> result) {
@@ -98,7 +101,7 @@ public class MenuActivity extends AppCompatActivity {
                                 public void onError(String e) {
 
                                 }
-                            });
+                            });*/
                         }
 
                         @Override
@@ -123,7 +126,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        DAO = new PersonneDAO(this);
+        //DAO = new PersonneDAO(this);
 
         DAOCat = new CategorieDAO(this);
         DAOCat.GetAll(new VolleyCallback<List<Categorie>>() {
@@ -169,12 +172,16 @@ public class MenuActivity extends AppCompatActivity {
         return this.u;
     }
 
+
+
     public List<Categorie> GetCategories(){
         return this.categories;
     }
 
 
     public List<Reservation> GetReservations(){
+
+        //loadReservation();
         return this.reservations;
     }
 }
